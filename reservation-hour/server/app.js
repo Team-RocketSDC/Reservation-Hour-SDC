@@ -42,6 +42,21 @@ app.get('/api/:restaurant_id/reservation', (req, res) => {
   });
 });
 
+app.get('/api/:restaurant_id/hour', (req, res) => {
+  const id = req.params.restaurant_id;
+  db.getHours(id, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get('/:restaurant_id/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 app.post('/api/:restaurant_id/reservation', (req, res) => {
   db.addReservation(
     req.body.reservee,
@@ -55,6 +70,32 @@ app.post('/api/:restaurant_id/reservation', (req, res) => {
       }
     },
   );
+});
+
+app.post('/api/:restaurant_id/hour', (req, res) => {
+  db.addHour(
+    req.body.weekday,
+    req.body.openingHour,
+    req.body.closingHour,
+    req.params.restaurant_id,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    },
+  );
+});
+
+app.post('/api/restaurant', (req, res) => {
+  db.addRestaurant(req.body.restaurant, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.put('/api/:restaurant_id/reservation', (req, res) => {
@@ -139,47 +180,6 @@ app.delete('/api/:restaurant_id', (req, res) => {
       }
     },
   );
-});
-
-app.post('/api/:restaurant_id/hour', (req, res) => {
-  db.addHour(
-    req.body.weekday,
-    req.body.openingHour,
-    req.body.closingHour,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    },
-  );
-});
-
-app.post('/api/restaurant', (req, res) => {
-  db.addRestaurant(req.body.restaurant, (err, result) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
-
-app.get('/api/:restaurant_id/hour', (req, res) => {
-  const id = req.params.restaurant_id;
-  db.getHours(id, (err, result) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
-
-app.get('/:restaurant_id/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.listen(5882);
