@@ -2,11 +2,6 @@
 
 > List of required and optional api endpoints
 
-![alt text](https://i.imgur.com/kHS40QO.png)
-![alt text](https://i.imgur.com/d2B1rsJ.png)
-![alt text](https://i.imgur.com/sImQERZ.png)
-![alt text](https://i.imgur.com/QJ3TFEL.png)
-
 ## Required
 
 > GET - '/api/:restaurant_id/reservation' provides reservation information
@@ -34,3 +29,10 @@
 > DELETE - '/api/:restaurant_id/hour' deletes operation hours record for a day
 
 > DELETE - '/api/:restaurant_id' deletes a restaurant
+
+## Images
+
+![alt text](https://i.imgur.com/kHS40QO.png)
+![alt text](https://i.imgur.com/d2B1rsJ.png)
+![alt text](https://i.imgur.com/sImQERZ.png)
+![alt text](https://i.imgur.com/QJ3TFEL.png)
