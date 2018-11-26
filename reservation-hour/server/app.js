@@ -18,15 +18,15 @@ app.use(express.static('build'));
 app.use(
   compression({
     level: 2, // set compression level from 1 to 9 (6 by default)
-    filter: shouldCompress, // set predicate to determine whether to compress
-  }),
+    filter: shouldCompress // set predicate to determine whether to compress
+  })
 );
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
+    'Origin, X-Requested-With, Content-Type, Accept'
   );
   next();
 });
@@ -44,11 +44,11 @@ app.get('/api/:restaurant_id/reservation', (req, res) => {
 
 app.get('/api/:restaurant_id/hour', (req, res) => {
   const id = req.params.restaurant_id;
-  db.getHours(id, (err, result) => {
+  db.getCassHours(id, (err, result) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(result);
+      res.send(result.rows);
     }
   });
 });
@@ -68,7 +68,7 @@ app.post('/api/:restaurant_id/reservation', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 
@@ -84,7 +84,7 @@ app.post('/api/:restaurant_id/hour', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 
@@ -109,7 +109,7 @@ app.put('/api/:restaurant_id/reservation', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 
@@ -123,7 +123,7 @@ app.put('/api/:restaurant_id', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 
@@ -139,7 +139,7 @@ app.put('/api/:restaurant_id/hour', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 
@@ -154,7 +154,7 @@ app.delete('/api/:restaurant_id/reservation', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 
@@ -178,7 +178,7 @@ app.delete('/api/:restaurant_id', (req, res) => {
       } else {
         res.send(result);
       }
-    },
+    }
   );
 });
 

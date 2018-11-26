@@ -3,18 +3,18 @@ const faker = require('faker');
 const { hoursSeed } = require('./seedHours.js');
 
 const restaurantSeed = () => {
-  const stream = fs.createWriteStream('data/restaurants.csv');
+  const stream = fs.createWriteStream('./restaurants.csv');
   let i = 0;
-  stream.write('name\n');
+  stream.write('restaurantId,name\n');
   function write() {
     while (i < 10000000) {
       // 10 million restaurants
       i += 1;
-      if (!stream.write(`${faker.commerce.productName()}\n`)) {
+      if (!stream.write(`${i},${faker.commerce.productName()}\n`)) {
         return;
       }
     }
-    stream.end(hoursSeed());
+    stream.end();
   }
   stream.on('drain', () => {
     write();

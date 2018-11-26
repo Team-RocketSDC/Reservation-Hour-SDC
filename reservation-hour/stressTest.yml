@@ -1,0 +1,11 @@
+config:
+  target: 'http://localhost:5882'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+scenarios:
+  - flow:
+      - loop:
+          - get:
+              url: '/api/9000001/hour'
+        count: 50
