@@ -5,6 +5,8 @@
 npm
 npm-debug.log
 node_modules/
+newrelic.js
+package-lock.json
 
 pids
 *.pid
@@ -23,4 +25,7 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
+
+#data
+*.csv
 
