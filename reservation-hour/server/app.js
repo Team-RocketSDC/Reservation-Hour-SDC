@@ -33,11 +33,11 @@ app.use((req, res, next) => {
 
 app.get('/api/:restaurant_id/reservation', (req, res) => {
   const id = req.params.restaurant_id;
-  db.getReservations(id, (err, result) => {
+  db.getCassReservations(id, (err, result) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(result);
+      res.send(result.rows);
     }
   });
 });
@@ -72,114 +72,114 @@ app.post('/api/:restaurant_id/reservation', (req, res) => {
   );
 });
 
-app.post('/api/:restaurant_id/hour', (req, res) => {
-  db.addHour(
-    req.body.weekday,
-    req.body.openingHour,
-    req.body.closingHour,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+// app.post('/api/:restaurant_id/hour', (req, res) => {
+//   db.addHour(
+//     req.body.weekday,
+//     req.body.openingHour,
+//     req.body.closingHour,
+//     req.params.restaurant_id,
+//     (err, result) => {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.send(result);
+//       }
+//     },
+//   );
+// });
 
-app.post('/api/restaurant', (req, res) => {
-  db.addRestaurant(req.body.restaurant, (err, result) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
+// app.post('/api/restaurant', (req, res) => {
+//   db.addRestaurant(req.body.restaurant, (err, result) => {
+//     if (err) {
+//       res.send(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
 
-app.put('/api/:restaurant_id/reservation', (req, res) => {
-  db.updateReservation(
-    req.body.reservee,
-    req.body.time,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+// app.put('/api/:restaurant_id/reservation', (req, res) => {
+//   db.updateReservation(
+//     req.body.reservee,
+//     req.body.time,
+//     req.params.restaurant_id,
+//     (err, result) => {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.send(result);
+//       }
+//     },
+//   );
+// });
 
-app.put('/api/:restaurant_id', (req, res) => {
-  db.updateRestaurant(
-    req.body.restaurant,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+// app.put('/api/:restaurant_id', (req, res) => {
+//   db.updateRestaurant(
+//     req.body.restaurant,
+//     req.params.restaurant_id,
+//     (err, result) => {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.send(result);
+//       }
+//     },
+//   );
+// });
 
-app.put('/api/:restaurant_id/hour', (req, res) => {
-  db.updateHour(
-    req.body.weekday,
-    req.body.openingHour,
-    req.body.closingHour,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+// app.put('/api/:restaurant_id/hour', (req, res) => {
+//   db.updateHour(
+//     req.body.weekday,
+//     req.body.openingHour,
+//     req.body.closingHour,
+//     req.params.restaurant_id,
+//     (err, result) => {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.send(result);
+//       }
+//     },
+//   );
+// });
 
-app.delete('/api/:restaurant_id/reservation', (req, res) => {
-  db.deleteReservation(
-    req.body.reservee,
-    req.body.time,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+// app.delete('/api/:restaurant_id/reservation', (req, res) => {
+//   db.deleteReservation(
+//     req.body.reservee,
+//     req.body.time,
+//     req.params.restaurant_id,
+//     (err, result) => {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.send(result);
+//       }
+//     },
+//   );
+// });
 
-app.delete('/api/:restaurant_id/hour', (req, res) => {
-  db.deleteHour(req.body.weekday, req.params.restaurant_id, (err, result) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
+// app.delete('/api/:restaurant_id/hour', (req, res) => {
+//   db.deleteHour(req.body.weekday, req.params.restaurant_id, (err, result) => {
+//     if (err) {
+//       res.send(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
 
-app.delete('/api/:restaurant_id', (req, res) => {
-  db.deleteRestaurant(
-    req.body.name,
-    req.params.restaurant_id,
-    (err, result) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+// app.delete('/api/:restaurant_id', (req, res) => {
+//   db.deleteRestaurant(
+//     req.body.name,
+//     req.params.restaurant_id,
+//     (err, result) => {
+//       if (err) {
+//         res.send(err);
+//       } else {
+//         res.send(result);
+//       }
+//     },
+//   );
+// });
 
 app.listen(5882);
