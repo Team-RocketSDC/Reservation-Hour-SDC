@@ -5,18 +5,18 @@
 //   database: 'reservation_hour',
 // });
 
+// connection.connect();
+
 const cassandra = require('cassandra-driver');
 
 const connection = new cassandra.Client({
-  contactPoints: ['127.0.0.1:9042'],
+  contactPoints: ['3.16.23.11:9042'],
   keyspace: 'restaurants',
 });
 
-// connection.connect();
-
 connection.getCassHours = (id, callback) => {
   const query = `
-  SELECT * FROM restaurants.restaurants_hours WHERE id = ${id};
+  SELECT * FROM restaurants.hours WHERE id = ${id};
   `;
   connection.execute(query, (err, result) => {
     if (err) {
@@ -26,6 +26,34 @@ connection.getCassHours = (id, callback) => {
     }
   });
 };
+
+connection.getCassReservations = (id, callback) => {
+  const query = `
+  SELECT * FROM restaurants.reservations WHERE id = ${id};
+  `;
+  connection.execute(query, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+// connection.addReservation = (reservee, time, restaurantId, callback) => {
+//   const query = `
+//     UPDATE restaurants.reservations SET reservations = reservations + [{reservee:${reservee},time:${time}}] WHERE id = ${restaurantId};
+//   `;
+//   connection.execute(query, (err, result) => {
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, result);
+//     }
+//   });
+// };
+
+// unused rest api calls
 
 // connection.getReservations = (id, callback) => {
 //   const query = `
@@ -42,11 +70,11 @@ connection.getCassHours = (id, callback) => {
 //   });
 // };
 
-// connection.addReservation = (reservee, time, restaurantId, callback) => {
+// connection.getHours = (id, callback) => {
 //   const query = `
-//     INSERT INTO reservation ( reservee, time, restaurantId )
-//     VALUES
-//     ( ${reservee}, ${time}, ${restaurantId} );
+//     SELECT hour.weekday,hour.openingHour,hour.closingHour,restaurant.name FROM hour
+//     INNER JOIN restaurant ON hour.restaurantId = restaurant.id
+//     WHERE restaurantId = ${id}
 //   `;
 //   connection.query(query, (err, result) => {
 //     if (err) {
@@ -167,21 +195,6 @@ connection.getCassHours = (id, callback) => {
 //     INSERT INTO restaurant ( name )
 //     VALUES
 //     ( ${restaurant} );
-//   `;
-//   connection.query(query, (err, result) => {
-//     if (err) {
-//       callback(err, null);
-//     } else {
-//       callback(null, result);
-//     }
-//   });
-// };
-
-// connection.getHours = (id, callback) => {
-//   const query = `
-//     SELECT hour.weekday,hour.openingHour,hour.closingHour,restaurant.name FROM hour
-//     INNER JOIN restaurant ON hour.restaurantId = restaurant.id
-//     WHERE restaurantId = ${id}
 //   `;
 //   connection.query(query, (err, result) => {
 //     if (err) {
