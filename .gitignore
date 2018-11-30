@@ -1,4 +1,3 @@
 proxy/node_modules/
-proxy/newrelic.js
 *.log
 proxy/package-lock.json
