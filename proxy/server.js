@@ -8,7 +8,7 @@ const context = '/'; // requests with this path will be proxied
 
 // configure proxy middleware options
 const options = {
-  target: 'http://localhost:5882/' // target host
+  target: 'http://35.172.129.10:5882/' // target host
 };
 
 // create the proxy
