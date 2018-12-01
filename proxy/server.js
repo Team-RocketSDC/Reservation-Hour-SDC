@@ -16,5 +16,6 @@ const proxy = proxyMiddleware(context, options);
 
 // use the configured `proxy` in web server
 const app = express();
+app.use(express.static('public'));
 app.use(proxy);
 app.listen(3000);
